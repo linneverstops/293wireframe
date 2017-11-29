@@ -1,24 +1,25 @@
+package wireframe;
 import javax.swing.*;
 
 abstract class Elements extends Groups {
 
     JComponent component;
 
-    private int width;
+    int width;
 
-    private int length;
+    int length;
 
-    private int location_x;
+    int location_x;
 
-    private int location_y;
+    int location_y;
 
-    void resize(int width, int length) throws WireframeException {
+    public void resize(int width, int length) throws WireframeException {
         checkIsLocked();
         this.width = width;
         this.length = length;
     }
 
-    void align(Wireframe.Alignment alignment) throws WireframeException {
+    public void align(Wireframe.Alignment alignment) throws WireframeException {
         checkIsLocked();
         switch(alignment) {
             case LEFT:
@@ -38,19 +39,19 @@ abstract class Elements extends Groups {
         }
     }
 
-    int getLocation_x() {
+    public int getLocation_x() {
         return this.location_x;
     }
 
-    int getLocation_y() {
+    public int getLocation_y() {
         return this.location_y;
     }
 
-    JComponent getComponent() {
+    public JComponent getComponent() {
         return this.component;
     }
 
-    void move(int location_x, int location_y) throws WireframeException {
+    public void move(int location_x, int location_y) throws WireframeException {
         checkIsLocked();
         this.location_x = location_x;
         this.location_y = location_y;

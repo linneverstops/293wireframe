@@ -1,3 +1,4 @@
+package wireframe;
 public class WireframeException extends Exception {
 
     private String message;

@@ -1,3 +1,4 @@
+package wireframe;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collections;
@@ -24,20 +25,24 @@ public class Wireframe extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame jframe = new JFrame("Testing");
-        Container c = jframe.getContentPane();
-        c.add(new JTextArea("firstline\nsecondline\n"));
-        //c.add(new JSlider());
-        jframe.setSize(500, 500);
-        jframe.setVisible(true);
+        Wireframe wireframe = new Wireframe(500, 500);
+
     }
 
     public void displayWireframe() {
-
+        this.setVisible(true);
     }
 
     void addToWireframe(Groups group) {
         this.elements.add(group);
+        if(group.getClass().equals(Elements.class)) {
+            Elements element = (Elements)group;
+            this.container.add(element.getComponent());
+        }
+        else {
+            Group bigGroup = (Group)group;
+            for(Groups smallGroup : group.)
+        }
     }
 
     void moveGroupToIndex(Groups group, int index) {

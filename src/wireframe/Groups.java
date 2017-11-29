@@ -1,3 +1,4 @@
+package wireframe;
 public abstract class Groups {
 
     Annotations annotation;
@@ -12,12 +13,8 @@ public abstract class Groups {
         this.isLocked = false;
     }
 
-    void addAnnotation(Annotations annotation) {
-        this.annotation = annotation;
-    }
-
-    void removeAnnotation() {
-        this.annotation = null;
+    void annotate(String annotation) {
+        this.annotation = new Annotations(annotation);
     }
 
     boolean isLocked() {

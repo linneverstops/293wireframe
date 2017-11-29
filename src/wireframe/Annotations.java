@@ -1,3 +1,4 @@
+package wireframe;
 class Annotations extends Elements {
 
     private String annotation;

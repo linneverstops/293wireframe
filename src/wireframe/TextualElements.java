@@ -1,4 +1,4 @@
-
+package wireframe;
 abstract class TextualElements extends Elements {
 
     final String text;
