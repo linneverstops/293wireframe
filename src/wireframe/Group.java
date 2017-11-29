@@ -10,12 +10,16 @@ class Group extends Groups {
         this.elements = Collections.emptyList();
     }
 
-    void group(Groups group) throws WireframeException {
+    public List<Groups> getElements() {
+        return this.elements;
+    }
+
+    public void group(Groups group) throws WireframeException {
         checkIsLocked();
         this.elements.add(group);
     }
 
-    void ungroup(Groups group) throws WireframeException {
+    public void ungroup(Groups group) throws WireframeException {
         checkIsLocked();
         int groupIndex = this.elements.indexOf(group);
         this.elements.remove(group);

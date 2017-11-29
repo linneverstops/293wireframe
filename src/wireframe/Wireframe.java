@@ -1,6 +1,8 @@
 package wireframe;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,12 +23,21 @@ public class Wireframe extends JFrame {
     public Wireframe(int width, int length) {
         this.container = this.getContentPane();
         this.setSize(width, length);
-        this.elements = Collections.emptyList();
+        this.elements = new ArrayList<>();
     }
 
     public static void main(String[] args) {
-        Wireframe wireframe = new Wireframe(500, 500);
-
+        Wireframe wireframe = new Wireframe(600, 600);
+        Image image = new Image(100, 100, 100, 100);
+        ScrollBar scrollBar = new ScrollBar(400,400);
+        /*
+        Border border = image.getComponent().getBorder();
+        Dimension size = image.getComponent().getSize();
+        border.paintBorder(image.getComponent(), 0, 0, size.width, size.height);
+        */
+        wireframe.addToWireframe(image);
+        wireframe.addToWireframe(scrollBar);
+        wireframe.displayWireframe();
     }
 
     public void displayWireframe() {
@@ -35,13 +46,15 @@ public class Wireframe extends JFrame {
 
     void addToWireframe(Groups group) {
         this.elements.add(group);
-        if(group.getClass().equals(Elements.class)) {
+        if(Elements.class.isAssignableFrom(group.getClass())) {
             Elements element = (Elements)group;
             this.container.add(element.getComponent());
+            element.getComponent().setLocation(element.getLocation_x(), element.getLocation_y());
         }
         else {
             Group bigGroup = (Group)group;
-            for(Groups smallGroup : group.)
+            for (Groups smallGroup : ((Group) group).getElements())
+                addToWireframe(smallGroup);
         }
     }
 
