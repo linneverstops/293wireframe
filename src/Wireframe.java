@@ -17,16 +17,10 @@ public class Wireframe extends JFrame {
 
     private List<Groups> elements;
 
-    private int width;
-
-    private int length;
-
     public Wireframe(int width, int length) {
         this.container = this.getContentPane();
-        this.setSize(500, 500);
+        this.setSize(width, length);
         this.elements = Collections.emptyList();
-        this.width = width;
-        this.length = length;
     }
 
     public static void main(String[] args) {
@@ -38,12 +32,8 @@ public class Wireframe extends JFrame {
         jframe.setVisible(true);
     }
 
-    public int getWidth() {
-        return this.width;
-    }
+    public void displayWireframe() {
 
-    public int getLength() {
-        return this.length;
     }
 
     void addToWireframe(Groups group) {
