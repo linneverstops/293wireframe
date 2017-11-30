@@ -1,16 +1,11 @@
 package wireframe;
 import javax.swing.*;
 
-public class Paragraph extends TextualElements {
+public class Paragraph extends Elements {
 
-    public Paragraph(String paragraph, int width, int length, int location_x, int location_y) {
-        super(paragraph);
-        this.width = width;
-        this.length = length;
-        this.location_x = location_x;
-        this.location_y = location_y;
-        this.isLocked = false;
-        this.component = new JTextArea(paragraph);
+    public Paragraph(int width, int length, int location_x, int location_y, String paragraph) {
+        super(width, length, location_x, location_y, new JLabel("<html>"+ paragraph +"</html>"));
+        ((JLabel)this.getComponent()).setVerticalAlignment(SwingConstants.TOP);
     }
 
 }

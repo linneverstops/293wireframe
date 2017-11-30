@@ -16,63 +16,89 @@ public class Wireframe extends JFrame {
         JUSTIFIED;
     }
 
-    private Container container;
-
-    private List<Groups> elements;
+    private List<Groups> components;
 
     public Wireframe(int width, int length) {
-        this.container = this.getContentPane();
         this.setSize(width, length);
-        this.elements = new ArrayList<>();
+        this.components = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        Wireframe wireframe = new Wireframe(600, 600);
-        Image image = new Image(100, 100, 100, 100);
-        ScrollBar scrollBar = new ScrollBar(400,400);
-        /*
-        Border border = image.getComponent().getBorder();
-        Dimension size = image.getComponent().getSize();
-        border.paintBorder(image.getComponent(), 0, 0, size.width, size.height);
-        */
+    public static void main(String[] args) throws WireframeException {
+        Wireframe wireframe = new Wireframe(500, 600);
+        wireframe.setLayout(null);
+        Image image = new Image(200, 200, 30, 30, "image.png");
+        Paragraph paragraph = new Paragraph(200, 100, 30, 260, "This is a paragraph, a paragraph with some sentences with some words that don't mean anything so please don't read it.");
+        String[] combo = {"One", "Two", "Three"};
+        ComboBox comboBox = new ComboBox(200, 30, 30, 390, combo);
+        ProgressBar progressBar = new ProgressBar(200, 30, 30, 470, SwingConstants.HORIZONTAL);
+
+
+        Headline headline = new Headline(200, 30, 270, 30, "EECS293 PA12");
+        String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore";
+        CannedText text = new CannedText(200, 220, 270, 90, loremIpsum);
+        //((JLabel)text.getComponent()).setText("lalala");
+        Slider slider = new Slider(200, 50, 270, 340, SwingConstants.HORIZONTAL);
+        String[] listData = {"List1", "List2", "List3"};
+        wireframe.List list = new wireframe.List(150, 100, 270, 420, listData);
+        ScrollBar scrollBar = new ScrollBar(40,100, 430, 420, SwingConstants.VERTICAL);
+        Group group = new Group();
+        group.addToGroup(list);
+        group.addToGroup(scrollBar);
+        Group bgroup = new Group();
+        bgroup.addToGroup(group);
         wireframe.addToWireframe(image);
-        wireframe.addToWireframe(scrollBar);
-        wireframe.displayWireframe();
+        wireframe.addToWireframe(paragraph);
+        wireframe.addToWireframe(comboBox);
+        wireframe.addToWireframe(progressBar);
+        wireframe.addToWireframe(headline);
+        wireframe.addToWireframe(text);
+        wireframe.addToWireframe(slider);
+        wireframe.addToWireframe(bgroup);
+        //wireframe.addToWireframe(list);
+        //wireframe.addToWireframe(scrollBar);
+        wireframe.setVisible(true);
     }
 
-    public void displayWireframe() {
-        this.setVisible(true);
-    }
 
-    void addToWireframe(Groups group) {
-        this.elements.add(group);
-        if(Elements.class.isAssignableFrom(group.getClass())) {
+
+    public void addToWireframe(Groups group) {
+        this.components.add(group);
+        if(isAnElement(group)) {
             Elements element = (Elements)group;
-            this.container.add(element.getComponent());
-            element.getComponent().setLocation(element.getLocation_x(), element.getLocation_y());
+            element.getComponent().setBounds(element.getLocation_x(), element.getLocation_y(), element.getWidth(), element.getLength());
+            add(element.getComponent());
         }
         else {
+            //recursively retrieve all elements from the group
             Group bigGroup = (Group)group;
-            for (Groups smallGroup : ((Group) group).getElements())
+            for (Groups smallGroup : bigGroup.getElements())
                 addToWireframe(smallGroup);
         }
     }
 
-    void moveGroupToIndex(Groups group, int index) {
-        if(!elements.contains(group))
-            throw new NoSuchElementException("No such element");
-        if(index >= elements.size())
-            throw new ArrayIndexOutOfBoundsException();
-        int elementIndex = elements.indexOf(group);
-        this.elements.add(index, group);
-        if(index <= elementIndex)
-            this.elements.remove(elementIndex + 1);
-        else
-            this.elements.remove(elementIndex);
+        public void removeFromWireframe(Groups group) {
+        int elementIndex = this.components.indexOf(group);
+        this.components.remove(elementIndex);
     }
 
-    void delete(Groups group) {
-        int elementIndex = this.elements.indexOf(group);
-        this.elements.remove(elementIndex);
+    public void moveGroupToIndex(Groups group, int index) throws WireframeException {
+        checkGroupExist(group);
+        if(index >= components.size())
+            throw new WireframeException("Index larger than total number of components");
+        int elementIndex = components.indexOf(group);
+        this.components.add(index, group);
+        if(index <= elementIndex)
+            this.components.remove(elementIndex + 1);
+        else
+            this.components.remove(elementIndex);
+    }
+
+    private void checkGroupExist(Groups group) throws WireframeException {
+        if(!components.contains(group))
+            throw new WireframeException("No such group/element");
+    }
+
+    private boolean isAnElement(Groups group) {
+        return Elements.class.isAssignableFrom(group.getClass());
     }
 }

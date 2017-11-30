@@ -3,15 +3,23 @@ import javax.swing.*;
 
 abstract class Elements extends Groups {
 
-    JComponent component;
+    private int width;
 
-    int width;
+    private int length;
 
-    int length;
+    private int location_x;
 
-    int location_x;
+    private int location_y;
 
-    int location_y;
+    private JComponent component;
+
+    Elements(int width, int length, int location_x, int location_y, JComponent component) {
+        this.width = width;
+        this.length = length;
+        this.location_x = location_x;
+        this.location_y = location_y;
+        this.component = component;
+    }
 
     public void resize(int width, int length) throws WireframeException {
         checkIsLocked();
@@ -19,6 +27,7 @@ abstract class Elements extends Groups {
         this.length = length;
     }
 
+    //need to change this
     public void align(Wireframe.Alignment alignment) throws WireframeException {
         checkIsLocked();
         switch(alignment) {
@@ -45,6 +54,14 @@ abstract class Elements extends Groups {
 
     public int getLocation_y() {
         return this.location_y;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getLength() {
+        return this.length;
     }
 
     public JComponent getComponent() {

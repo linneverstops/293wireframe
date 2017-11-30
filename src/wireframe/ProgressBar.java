@@ -3,12 +3,10 @@ import javax.swing.*;
 
 public class ProgressBar extends Elements {
 
-    public ProgressBar(int location_x, int location_y) {
-        this.width = -1;
-        this.length = -1;
-        this.location_x = location_x;
-        this.location_y = location_y;
-        this.isLocked = false;
-        this.component = new JProgressBar(SwingConstants.HORIZONTAL, 0, 100);
+    public ProgressBar(int width, int length, int location_x, int location_y, int orientation) {
+        super(width, length, location_x, location_y, new JProgressBar(orientation, 0, 100));
+        ((JProgressBar)this.getComponent()).setValue(0);
+        ((JProgressBar)this.getComponent()).setStringPainted(true);
     }
+
 }

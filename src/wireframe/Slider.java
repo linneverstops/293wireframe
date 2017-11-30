@@ -3,12 +3,7 @@ import javax.swing.*;
 
 public class Slider extends Elements {
 
-    public Slider(int location_x, int location_y) {
-        this.width = -1;
-        this.length = -1;
-        this.location_x = location_x;
-        this.location_y = location_y;
-        this.isLocked = false;
-        this.component = new JSlider(SwingConstants.HORIZONTAL);
+    public Slider(int width, int length, int location_x, int location_y, int orientation) {
+        super(width, length, location_x, location_y, new JSlider(orientation));
     }
 }
