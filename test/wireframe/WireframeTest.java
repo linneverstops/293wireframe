@@ -93,6 +93,7 @@ public class WireframeTest {
     @Test
     public void test_GUI() throws WireframeException, InterruptedException{
         Wireframe.main(null);
+        //let the GUI stay on for 5 secs
         TimeUnit.SECONDS.sleep(5);
     }
 

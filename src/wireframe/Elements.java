@@ -22,8 +22,7 @@ abstract class Elements extends Groups {
     }
 
     public void resize(int width, int length) throws WireframeException {
-        assert width > 0;
-        assert length > 0;
+        checkPositiveInput(width, length);
         checkIsLocked();
         this.width = width;
         this.length = length;
@@ -38,8 +37,7 @@ abstract class Elements extends Groups {
 
     @Override
     public void move(int location_x, int location_y) throws WireframeException {
-        assert location_x >= 0;
-        assert location_y >= 0;
+        checkPositiveInput(location_x, location_y);
         checkIsLocked();
         this.location_x = location_x;
         this.location_y = location_y;
@@ -63,6 +61,11 @@ abstract class Elements extends Groups {
 
     JComponent getComponent() {
         return this.component;
+    }
+
+    private void checkPositiveInput(int num1, int num2) throws WireframeException {
+        if(!(num1 >= 0 && num2 >= 0))
+            throw new WireframeException("Input out of range");
     }
 
     private void checkEmptyString(String input) throws WireframeException {

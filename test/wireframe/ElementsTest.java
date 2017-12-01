@@ -35,9 +35,14 @@ public class ElementsTest {
         }
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void test_resize_invalidParameter() throws WireframeException {
-        this.element.resize(-50, -20);
+        try {
+            this.element.resize(-50, -20);
+        }
+        catch (WireframeException we) {
+            assertThat(we.toString(), is("WireframeException: Input out of range"));
+        }
     }
 
     @Test
@@ -91,9 +96,14 @@ public class ElementsTest {
         }
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void test_move_invalidInput() throws WireframeException {
-        this.element.move(-55, -45);
+        try {
+            this.element.move(-55, -45);
+        }
+        catch (WireframeException we) {
+            assertThat(we.toString(), is("WireframeException: Input out of range"));
+        }
     }
 
 }
