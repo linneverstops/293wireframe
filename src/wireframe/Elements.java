@@ -27,14 +27,9 @@ abstract class Elements extends Groups {
         this.length = length;
     }
 
-    public void align(Wireframe.Alignment alignment) throws WireframeException {
-        checkIsLocked();
-        component.setAlignmentY(alignment.getOrientation());
-    }
-
     @Override
     public void annotate(String annotation) {
-        setAnnotation(new Annotations(width, length, location_x, location_y, annotation));
+        setAnnotation(new Annotations(location_x, location_y + length, annotation));
     }
 
     @Override

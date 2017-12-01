@@ -1,4 +1,7 @@
 package wireframe;
+
+import javax.swing.*;
+
 abstract class Groups {
 
     private Annotations annotation;
@@ -28,13 +31,19 @@ abstract class Groups {
         }
     }
 
-    Annotations getAnnotation() throws WireframeException {
-        if(annotation == null)
-            throw new WireframeException("No Annotation for this element/group");
+    boolean hasAnnotation() {
+        return this.annotation != null;
+    }
+
+    Annotations getAnnotation() {
         return this.annotation;
     }
 
     void setAnnotation(Annotations annotation) {
         this.annotation = annotation;
+    }
+
+    JComponent annotationComponent() {
+        return this.annotation.getComponent();
     }
 }

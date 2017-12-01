@@ -1,25 +1,23 @@
 package wireframe;
 
 import javax.swing.*;
+import java.awt.*;
 
-class Annotations extends Elements {
+class Annotations extends Text {
 
-    private String annotation;
+    private static final int ANNOTATIONS_WIDTH = 100, ANNOTATIONS_LENGTH = 20;
 
     private boolean isVisible;
 
-    Annotations(int width, int length, int location_x, int location_y, String annotation) {
-        super(width, length, location_x, location_y, new JLabel("<html>" + annotation + "</html>"));
-        this.annotation = annotation;
+    Annotations(int location_x, int location_y, String annotation) {
+        super(ANNOTATIONS_WIDTH, ANNOTATIONS_LENGTH, location_x, location_y, annotation);
         this.isVisible = false;
+        this.getComponent().setBackground(Color.GREEN);
+        this.getComponent().setOpaque(true);
+        this.getComponent().setVisible(false);
     }
 
-    void setText(String annotation) {
-        this.annotation = annotation;
-        ((JLabel)this.getComponent()).setText(annotation);
-    }
-
-    void setIsVisibility(boolean isVisible) {
+    void setIsVisible(boolean isVisible) {
         this.isVisible = isVisible;
         this.getComponent().setVisible(isVisible);
     }
