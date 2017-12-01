@@ -13,7 +13,7 @@ class Annotations extends Groups {
     Annotations(String annotation) {
         this.annotation = annotation;
         this.isVisible = false;
-        this.label = new JLabel("annotation");
+        this.label = new JLabel("<html>" + annotation + "</html>");
     }
 
     void setText(String annotation) {
@@ -22,9 +22,11 @@ class Annotations extends Groups {
 
     void display() {
         this.isVisible = true;
+        label.setVisible(true);
     }
 
     void hide() {
         this.isVisible = false;
+        label.setVisible(false);
     }
 }

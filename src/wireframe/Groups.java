@@ -10,11 +10,11 @@ abstract class Groups {
         isLocked = false;
     }
 
-    void lock() {
+    public void lock() {
         this.isLocked = true;
     }
 
-    void unlock() {
+    public void unlock() {
         this.isLocked = false;
     }
 

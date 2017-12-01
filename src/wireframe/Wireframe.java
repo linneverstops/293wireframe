@@ -9,11 +9,19 @@ import java.util.NoSuchElementException;
 
 public class Wireframe extends JFrame {
 
-    enum Alignment {
-        LEFT,
-        RIGHT,
-        CENTER,
-        JUSTIFIED;
+    public enum Alignment {
+        LEFT(SwingConstants.LEFT),
+        RIGHT(SwingConstants.RIGHT),
+        CENTER(SwingConstants.CENTER),
+        JUSTIFIED(SwingConstants.LEADING),
+        VERTICAL(SwingConstants.VERTICAL),
+        HORIZONTAL(SwingConstants.HORIZONTAL);
+
+        private int orientation;
+
+        Alignment(int orientation) {
+            this.orientation = orientation;
+        }
     }
 
     private List<Groups> components;
@@ -56,49 +64,64 @@ public class Wireframe extends JFrame {
         wireframe.addToWireframe(bgroup);
         //wireframe.addToWireframe(list);
         //wireframe.addToWireframe(scrollBar);
-        wireframe.setVisible(true);
+        wireframe.displayGUI();
     }
 
-
+    public void displayGUI() {
+        this.addComponentsToGUI(this.components);
+        this.setVisible(true);
+    }
 
     public void addToWireframe(Groups group) {
-        this.components.add(group);
-        if(isAnElement(group)) {
-            Elements element = (Elements)group;
-            element.getComponent().setBounds(element.getLocation_x(), element.getLocation_y(), element.getWidth(), element.getLength());
-            add(element.getComponent());
-        }
-        else {
-            //recursively retrieve all elements from the group
-            Group bigGroup = (Group)group;
-            for (Groups smallGroup : bigGroup.getElements())
-                addToWireframe(smallGroup);
-        }
+        Wireframe.addGroupToListAtIndex(group, this.components, 0);
     }
 
-        public void removeFromWireframe(Groups group) {
-        int elementIndex = this.components.indexOf(group);
-        this.components.remove(elementIndex);
+    public void removeFromWireframe(Groups group) throws WireframeException {
+        Wireframe.removeGroupFromList(group, this.components);
     }
 
     public void moveGroupToIndex(Groups group, int index) throws WireframeException {
-        checkGroupExist(group);
-        if(index >= components.size())
-            throw new WireframeException("Index larger than total number of components");
-        int elementIndex = components.indexOf(group);
-        this.components.add(index, group);
-        if(index <= elementIndex)
-            this.components.remove(elementIndex + 1);
-        else
-            this.components.remove(elementIndex);
+        checkValidIndex(index);
+        Wireframe.removeGroupFromList(group, this.components);
+        Wireframe.addGroupToListAtIndex(group, this.components, index);
     }
 
-    private void checkGroupExist(Groups group) throws WireframeException {
+    private static void checkGroupExist(Groups group, List<Groups> components) throws WireframeException {
         if(!components.contains(group))
             throw new WireframeException("No such group/element");
     }
 
+    private void checkValidIndex(int index) throws WireframeException {
+        if(index >= components.size())
+            throw new WireframeException("Index larger than total number of components");
+    }
+
+    static void addGroupToListAtIndex(Groups group, List<Groups> list, int index) {
+        list.add(index, group);
+    }
+
+    static void removeGroupFromList(Groups group, List<Groups> list) throws WireframeException {
+        Wireframe.checkGroupExist(group, list);
+        int elementIndex = list.indexOf(group);
+        list.remove(elementIndex);
+    }
+
     private boolean isAnElement(Groups group) {
         return Elements.class.isAssignableFrom(group.getClass());
+    }
+
+    private void addComponentsToGUI(List<Groups> list) {
+        for(Groups component : list) {
+            if(isAnElement(component)) {
+                Elements element = (Elements)component;
+                element.getComponent().setBounds(element.getLocation_x(), element.getLocation_y(), element.getWidth(), element.getLength());
+                add(element.getComponent());
+            }
+            else {
+                //recursively retrieve all elements from the group
+                Group group = (Group)component;
+                addComponentsToGUI(group.getElements());
+            }
+        }
     }
 }

@@ -17,12 +17,11 @@ class Group extends Groups {
 
     public void addToGroup(Groups group) throws WireframeException {
         checkIsLocked();
-        this.elements.add(group);
+        Wireframe.addGroupToListAtIndex(group, this.elements, 0);
     }
 
     public void removeFromGroup(Groups group) throws WireframeException {
         checkIsLocked();
-        int groupIndex = this.elements.indexOf(group);
-        this.elements.remove(group);
+        Wireframe.removeGroupFromList(group, this.elements);
     }
 }
