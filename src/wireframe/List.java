@@ -9,9 +9,4 @@ class List extends Elements {
         super(width, length, location_x, location_y, new JList<>(listData));
         this.listData = listData;
     }
-
-    String[] getListData() {
-        return this.listData;
-    }
-
 }

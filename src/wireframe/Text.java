@@ -25,8 +25,4 @@ class Text extends Elements {
         textBox.setText(builder.toString());
     }
 
-    String getText() {
-        return this.text;
-    }
-
 }

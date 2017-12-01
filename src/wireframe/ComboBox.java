@@ -10,8 +10,4 @@ class ComboBox extends Elements {
         this.combo = combo;
     }
 
-    public String[] geCombo() {
-        return combo;
-    }
-
 }

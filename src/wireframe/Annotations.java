@@ -16,6 +16,10 @@ class Annotations extends Text {
         this.getComponent().setVisible(false);
     }
 
+    boolean isVisible() {
+        return this.isVisible;
+    }
+
     void setIsVisible(boolean visible) {
         this.isVisible = visible;
         this.getComponent().setVisible(isVisible);
