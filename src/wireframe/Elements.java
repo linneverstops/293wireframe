@@ -32,7 +32,7 @@ abstract class Elements extends Groups {
     @Override
     public void annotate(String annotation) throws WireframeException {
         checkIsLocked();
-        checkEmpty(annotation);
+        checkEmptyString(annotation);
         setAnnotation(new Annotations(location_x, location_y + length, annotation));
     }
 
@@ -65,7 +65,7 @@ abstract class Elements extends Groups {
         return this.component;
     }
 
-    private void checkEmpty(String input) throws WireframeException {
+    private void checkEmptyString(String input) throws WireframeException {
         if(input == null || input.length() == 0)
             throw new WireframeException("Annotation can not be empty");
     }

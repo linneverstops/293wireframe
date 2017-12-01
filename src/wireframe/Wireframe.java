@@ -1,13 +1,9 @@
 package wireframe;
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class Wireframe extends JLayeredPane implements ActionListener {
 
@@ -28,11 +24,11 @@ public class Wireframe extends JLayeredPane implements ActionListener {
         }
     }
 
-    private List<Groups> components;
+    private List<Groups> componentsList;
 
     public Wireframe(int width, int length) {
         this.setSize(width, length);
-        this.components = new ArrayList<>();
+        this.componentsList = new ArrayList<>();
     }
 
     public static void main(String[] args) throws WireframeException {
@@ -82,14 +78,14 @@ public class Wireframe extends JLayeredPane implements ActionListener {
 
     private void displayGUI() {
         JFrame jframe = new JFrame();
-        this.addComponentsToGUI(this.components);
+        this.addComponentsToGUI(this.componentsList);
         jframe.add(this);
         jframe.setSize(this.getSize());
         jframe.setVisible(true);;
     }
 
     void displayAnnotations() {
-        for(Groups group : this.components) {
+        for(Groups group : this.componentsList) {
             if(group.hasAnnotation()) {
                 group.getAnnotation().setIsVisible(true);
                 moveToFront(group.annotationComponent());
@@ -98,19 +94,24 @@ public class Wireframe extends JLayeredPane implements ActionListener {
     }
 
     public void addToWireframe(Groups group) throws WireframeException {
-        Wireframe.addGroupToListAtIndex(group, this.components, 0);
+        Wireframe.addGroupToListAtIndex(group, this.componentsList, 0);
     }
 
     public void removeFromWireframe(Groups group) throws WireframeException {
-        group.checkIsLocked();
-        Wireframe.removeGroupFromList(group, this.components);
+        checkEmptyList();
+        Wireframe.removeGroupFromList(group, this.componentsList);
     }
 
     public void moveGroupToIndex(Groups group, int index) throws WireframeException {
         group.checkIsLocked();
         checkValidIndex(index);
-        Wireframe.removeGroupFromList(group, this.components);
-        Wireframe.addGroupToListAtIndex(group, this.components, index);
+        Wireframe.removeGroupFromList(group, this.componentsList);
+        Wireframe.addGroupToListAtIndex(group, this.componentsList, index);
+    }
+
+    private void checkEmptyList() throws WireframeException {
+        if(this.componentsList.size() == 0)
+            throw new WireframeException("There is nothing to be removed");
     }
 
     private static void checkGroupExist(Groups group, List<Groups> components) throws WireframeException {
@@ -119,8 +120,12 @@ public class Wireframe extends JLayeredPane implements ActionListener {
     }
 
     private void checkValidIndex(int index) throws WireframeException {
-        if(index >= components.size())
-            throw new WireframeException("Index larger than total number of components");
+        if(index >= componentsList.size() || index < 0)
+            throw new WireframeException("Index not in range");
+    }
+
+    List<Groups> getComponentsList() {
+        return this.componentsList;
     }
 
     static void addGroupToListAtIndex(Groups group, List<Groups> list, int index) throws WireframeException {
@@ -130,6 +135,7 @@ public class Wireframe extends JLayeredPane implements ActionListener {
     }
 
     static void removeGroupFromList(Groups group, List<Groups> list) throws WireframeException {
+        group.checkIsLocked();
         Wireframe.checkGroupExist(group, list);
         int elementIndex = list.indexOf(group);
         list.remove(elementIndex);

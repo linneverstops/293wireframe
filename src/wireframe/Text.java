@@ -18,14 +18,14 @@ class Text extends Elements {
     public void align(Wireframe.Alignment alignment) throws WireframeException {
         checkIsLocked();
         JLabel textBox = ((JLabel)this.getComponent());
-        int indexToInsert = textBox.getText().indexOf("<html>") + "<html>".length();
-        StringBuilder builder = new StringBuilder(textBox.getText());
-        //insert the html align String, html can allow Justified Alignment
-        builder.insert(indexToInsert, alignment.getExpression());
+        StringBuilder builder = new StringBuilder("<html>");
+        builder.append(alignment.getExpression());
+        builder.append(this.text);
+        builder.append("</html>");
         textBox.setText(builder.toString());
     }
 
-    public String getText() {
+    String getText() {
         return this.text;
     }
 

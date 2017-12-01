@@ -16,7 +16,7 @@ class Group extends Groups {
         for(Groups component : this.elements) {
             if(Wireframe.isAnElement(component)) {
                 Elements element = (Elements)component;
-                element.move(newLocation(element, x_units), newLocation(element, y_units));
+                element.move(newLocation(element.getLocation_x(), x_units), newLocation(element.getLocation_y(), y_units));
             }
             else {
                 Group subgroup = (Group)component;
@@ -47,7 +47,7 @@ class Group extends Groups {
         return this.elements;
     }
 
-    private int newLocation(Elements element, int unitsOfMovement) {
-        return element.getLocation_x() + unitsOfMovement;
+    private int newLocation(int originalValue, int unitsOfMovement) {
+        return originalValue + unitsOfMovement;
     }
 }
