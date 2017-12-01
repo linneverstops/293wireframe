@@ -76,7 +76,7 @@ public class Wireframe extends JLayeredPane implements ActionListener {
         wireframe.displayGUI();
     }
 
-    private void displayGUI() {
+    void displayGUI() {
         JFrame jframe = new JFrame();
         this.addComponentsToGUI(this.componentsList);
         jframe.add(this);

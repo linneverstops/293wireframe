@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import javax.swing.*;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -86,6 +88,34 @@ public class WireframeTest {
         catch (WireframeException we) {
             assertThat(we.toString(), is("WireframeException: Index not in range"));
         }
+    }
+
+    @Test
+    public void test_GUI() throws WireframeException, InterruptedException{
+        Wireframe.main(null);
+        TimeUnit.SECONDS.sleep(5);
+    }
+
+    @Test
+    public void stressTest() throws WireframeException {
+        for(int i=0; i<500; i+=10) {
+            this.wireframe.addToWireframe(new Box(10, 10, 0, i));
+        }
+        for(int j=0; j<500; j+= 10) {
+            this.wireframe.addToWireframe(new Text(10, 10, 10, j, "T"));
+        }
+        for(int k=0; k<500; k+= 10) {
+            this.wireframe.addToWireframe(new ProgressBar(10, 10, 20, k, SwingConstants.HORIZONTAL));
+        }
+        String[] combo = {"a", "b"};
+        for(int m=0; m<500; m+= 10) {
+            this.wireframe.addToWireframe(new ComboBox(10, 10, 30, m, combo));
+        }
+        for(int n=0; n<500; n+= 10) {
+            this.wireframe.addToWireframe(new Headline(10, 10, 10, n, "T"));
+        }
+        wireframe.displayGUI();
+        wireframe.displayAnnotations();
     }
 
 }

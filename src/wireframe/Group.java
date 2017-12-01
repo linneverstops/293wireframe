@@ -28,8 +28,6 @@ class Group extends Groups {
     @Override
     public void annotate(String annotation) throws WireframeException {
         checkIsLocked();
-        if(elements.isEmpty())
-            throw new WireframeException("This group is empty");
         elements.get(0).annotate(annotation);
     }
 

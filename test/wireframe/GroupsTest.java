@@ -29,6 +29,11 @@ public class GroupsTest {
     }
 
     @Test
+    public void test_hasAnnotation_false() throws WireframeException {
+        assertFalse(this.group.hasAnnotation());
+    }
+
+    @Test
     public void test_setAnnotation_nominal() {
         Annotations annotation = new Annotations(30, 30, "annotation");
         this.group.setAnnotation(annotation);

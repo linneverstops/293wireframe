@@ -50,6 +50,28 @@ public class GroupTest {
     }
 
     @Test
+    public void test_move_subgroup() throws Exception {
+        Box box1 = new Box(20, 20, 30, 40);
+        Box box2 = new Box(20, 20, 30, 40);
+        Group subgroup1 = new Group();
+        Group subgroup2 = new Group();
+        subgroup1.addToGroup(box1);
+        subgroup2.addToGroup(box2);
+        Group subgroup3 = new Group();
+        subgroup3.addToGroup(subgroup1);
+        subgroup3.addToGroup(subgroup2);
+        int box1_originalXPosition = box1.getLocation_x();
+        int box1_originalYPosition = box1.getLocation_y();
+        int box2_originalXPosition = box2.getLocation_x();
+        int box2_originalYPosition = box2.getLocation_y();
+        subgroup3.move(50, 20);
+        assertEquals(box1.getLocation_x() - box1_originalXPosition, 50);
+        assertEquals(box1.getLocation_y() - box1_originalYPosition, 20);
+        assertEquals(box2.getLocation_x() - box2_originalXPosition, 50);
+        assertEquals(box2.getLocation_y() - box2_originalYPosition, 20);
+    }
+
+    @Test
     public void test_annotate_nominal() throws WireframeException {
         this.group.annotate("Annotation");
         assertEquals(this.group.getElements().get(0).getAnnotation().getText(), "Annotation");
