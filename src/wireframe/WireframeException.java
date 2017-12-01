@@ -14,4 +14,5 @@ public class WireframeException extends Exception {
         builder.append(this.message);
         return builder.toString();
     }
+
 }

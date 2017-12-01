@@ -1,6 +1,5 @@
 package wireframe;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 class Group extends Groups {
@@ -13,12 +12,11 @@ class Group extends Groups {
 
     @Override
     public void move(int x_units, int y_units) throws WireframeException {
+        checkIsLocked();
         for(Groups component : this.elements) {
             if(Wireframe.isAnElement(component)) {
                 Elements element = (Elements)component;
-                int new_x = element.getLocation_x() + x_units;
-                int new_y = element.getLocation_y() + y_units;
-                element.move(new_x, new_y);
+                element.move(newLocation(element, x_units), newLocation(element, y_units));
             }
             else {
                 Group subgroup = (Group)component;
@@ -29,13 +27,10 @@ class Group extends Groups {
 
     @Override
     public void annotate(String annotation) throws WireframeException {
+        checkIsLocked();
         if(elements.isEmpty())
             throw new WireframeException("This group is empty");
         elements.get(0).annotate(annotation);
-    }
-
-    public List<Groups> getElements() {
-        return this.elements;
     }
 
     public void addToGroup(Groups group) throws WireframeException {
@@ -46,5 +41,13 @@ class Group extends Groups {
     public void removeFromGroup(Groups group) throws WireframeException {
         checkIsLocked();
         Wireframe.removeGroupFromList(group, this.elements);
+    }
+
+    List<Groups> getElements() {
+        return this.elements;
+    }
+
+    private int newLocation(Elements element, int unitsOfMovement) {
+        return element.getLocation_x() + unitsOfMovement;
     }
 }

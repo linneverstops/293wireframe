@@ -40,6 +40,8 @@ public class Wireframe extends JLayeredPane implements ActionListener {
         wireframe.setLayout(null);
         JButton button = new JButton("Display All Annotations");
         button.addActionListener(wireframe);
+        Box box = new Box(200, 100, 270, 420);
+        box.annotate("Box and List");
         Image image = new Image(200, 200, 30, 30, "cwru.png");
         image.annotate("Image");
         Paragraph paragraph = new Paragraph(200, 100, 30, 260, "In U.S. News & World Report's 2016 rankings, Case Western Reserve's undergraduate program ranked 37th among national universities.[7] In 2016, the inaugural edition of The Wall Street Journal/Times Higher Education (WSJ/THE) ranked Case Western Reserve as 32nd among all universities and 29th among private institutions.");
@@ -58,12 +60,12 @@ public class Wireframe extends JLayeredPane implements ActionListener {
         slider.annotate("Slider");
         String[] listData = {"List1", "List2", "List3"};
         wireframe.List list = new wireframe.List(150, 100, 270, 420, listData);
-        list.annotate("List");
         ScrollBar scrollBar = new ScrollBar(40,100, 430, 420, SwingConstants.VERTICAL);
         scrollBar.annotate("ScrollBar");
         button.setSize(200, 15);
         button.setLocation(10, 10);
         wireframe.add(button);
+        wireframe.addToWireframe(box);
         wireframe.addToWireframe(image);
         wireframe.addToWireframe(paragraph);
         wireframe.addToWireframe(comboBox);
@@ -100,10 +102,12 @@ public class Wireframe extends JLayeredPane implements ActionListener {
     }
 
     public void removeFromWireframe(Groups group) throws WireframeException {
+        group.checkIsLocked();
         Wireframe.removeGroupFromList(group, this.components);
     }
 
     public void moveGroupToIndex(Groups group, int index) throws WireframeException {
+        group.checkIsLocked();
         checkValidIndex(index);
         Wireframe.removeGroupFromList(group, this.components);
         Wireframe.addGroupToListAtIndex(group, this.components, index);

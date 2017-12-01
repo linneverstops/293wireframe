@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProgressBar extends Elements {
+class ProgressBar extends Elements {
 
     private Timer timer = new Timer(100, new ActionListener() {
 
@@ -18,7 +18,7 @@ public class ProgressBar extends Elements {
         }
     });
 
-    public ProgressBar(int width, int length, int location_x, int location_y, int orientation) {
+    ProgressBar(int width, int length, int location_x, int location_y, int orientation) {
         super(width, length, location_x, location_y, new JProgressBar(orientation, 0, 100));
         JProgressBar progressBar = ((JProgressBar)this.getComponent());
         progressBar.setValue(0);

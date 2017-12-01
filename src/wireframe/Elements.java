@@ -28,7 +28,8 @@ abstract class Elements extends Groups {
     }
 
     @Override
-    public void annotate(String annotation) {
+    public void annotate(String annotation) throws WireframeException {
+        checkIsLocked();
         setAnnotation(new Annotations(location_x, location_y + length, annotation));
     }
 
@@ -39,23 +40,23 @@ abstract class Elements extends Groups {
         this.location_y = location_y;
     }
 
-    public int getLocation_x() {
+    int getLocation_x() {
         return this.location_x;
     }
 
-    public int getLocation_y() {
+    int getLocation_y() {
         return this.location_y;
     }
 
-    public int getWidth() {
+    int getWidth() {
         return this.width;
     }
 
-    public int getLength() {
+    int getLength() {
         return this.length;
     }
 
-    public JComponent getComponent() {
+    JComponent getComponent() {
         return this.component;
     }
 }

@@ -1,6 +1,5 @@
 package wireframe;
 
-import javax.swing.*;
 import java.awt.*;
 
 class Annotations extends Text {
@@ -17,8 +16,8 @@ class Annotations extends Text {
         this.getComponent().setVisible(false);
     }
 
-    void setIsVisible(boolean isVisible) {
-        this.isVisible = isVisible;
+    void setIsVisible(boolean visible) {
+        this.isVisible = visible;
         this.getComponent().setVisible(isVisible);
     }
 }
