@@ -23,7 +23,7 @@ abstract class Groups {
 
     void checkIsLocked() throws WireframeException {
         if(this.isLocked) {
-            throw new WireframeException("Element is locked!");
+            throw new WireframeException("Element is locked! No action can be done");
         }
     }
 

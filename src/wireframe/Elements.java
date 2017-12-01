@@ -22,6 +22,8 @@ abstract class Elements extends Groups {
     }
 
     public void resize(int width, int length) throws WireframeException {
+        assert width > 0;
+        assert length > 0;
         checkIsLocked();
         this.width = width;
         this.length = length;
@@ -30,11 +32,14 @@ abstract class Elements extends Groups {
     @Override
     public void annotate(String annotation) throws WireframeException {
         checkIsLocked();
+        checkEmpty(annotation);
         setAnnotation(new Annotations(location_x, location_y + length, annotation));
     }
 
     @Override
     public void move(int location_x, int location_y) throws WireframeException {
+        assert location_x >= 0;
+        assert location_y >= 0;
         checkIsLocked();
         this.location_x = location_x;
         this.location_y = location_y;
@@ -58,5 +63,10 @@ abstract class Elements extends Groups {
 
     JComponent getComponent() {
         return this.component;
+    }
+
+    private void checkEmpty(String input) throws WireframeException {
+        if(input == null || input.length() == 0)
+            throw new WireframeException("Annotation can not be empty");
     }
 }
