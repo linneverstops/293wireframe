@@ -43,6 +43,18 @@ public class ElementsTest {
         catch (WireframeException we) {
             assertThat(we.toString(), is("WireframeException: Input out of range"));
         }
+        try {
+            this.element.resize(50, -20);
+        }
+        catch (WireframeException we) {
+            assertThat(we.toString(), is("WireframeException: Input out of range"));
+        }
+        try {
+            this.element.resize(-50, 20);
+        }
+        catch (WireframeException we) {
+            assertThat(we.toString(), is("WireframeException: Input out of range"));
+        }
     }
 
     @Test
