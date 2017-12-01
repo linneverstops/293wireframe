@@ -2,31 +2,25 @@ package wireframe;
 
 import javax.swing.*;
 
-class Annotations extends Groups {
+class Annotations extends Elements {
 
     private String annotation;
 
     private boolean isVisible;
 
-    private JLabel label;
-
-    Annotations(String annotation) {
+    Annotations(int width, int length, int location_x, int location_y, String annotation) {
+        super(width, length, location_x, location_y, new JLabel("<html>" + annotation + "</html>"));
         this.annotation = annotation;
         this.isVisible = false;
-        this.label = new JLabel("<html>" + annotation + "</html>");
     }
 
     void setText(String annotation) {
         this.annotation = annotation;
+        ((JLabel)this.getComponent()).setText(annotation);
     }
 
-    void display() {
-        this.isVisible = true;
-        label.setVisible(true);
-    }
-
-    void hide() {
-        this.isVisible = false;
-        label.setVisible(false);
+    void setIsVisibility(boolean isVisible) {
+        this.isVisible = isVisible;
+        this.getComponent().setVisible(isVisible);
     }
 }

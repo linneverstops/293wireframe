@@ -10,19 +10,15 @@ abstract class Groups {
         isLocked = false;
     }
 
-    public void lock() {
-        this.isLocked = true;
+    public abstract void move(int x, int y) throws WireframeException;
+
+    public void setIsLocked(boolean locked) {
+        this.isLocked = locked;
     }
 
-    public void unlock() {
-        this.isLocked = false;
-    }
+    public abstract void annotate(String annotation) throws WireframeException;
 
-    public void annotate(String annotation) {
-        this.annotation = new Annotations(annotation);
-    }
-
-    boolean isLocked() {
+    private boolean isLocked() {
         return this.isLocked;
     }
 
@@ -30,5 +26,15 @@ abstract class Groups {
         if(isLocked()) {
             throw new WireframeException("Element is locked!");
         }
+    }
+
+    Annotations getAnnotation() throws WireframeException {
+        if(annotation == null)
+            throw new WireframeException("No Annotation for this element/group");
+        return this.annotation;
+    }
+
+    void setAnnotation(Annotations annotation) {
+        this.annotation = annotation;
     }
 }

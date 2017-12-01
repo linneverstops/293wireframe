@@ -13,14 +13,16 @@ public class Wireframe extends JFrame {
         LEFT(SwingConstants.LEFT),
         RIGHT(SwingConstants.RIGHT),
         CENTER(SwingConstants.CENTER),
-        JUSTIFIED(SwingConstants.LEADING),
-        VERTICAL(SwingConstants.VERTICAL),
-        HORIZONTAL(SwingConstants.HORIZONTAL);
+        JUSTIFIED(SwingConstants.LEADING);
 
         private int orientation;
 
         Alignment(int orientation) {
             this.orientation = orientation;
+        }
+
+        int getOrientation() {
+            return orientation;
         }
     }
 
@@ -106,7 +108,7 @@ public class Wireframe extends JFrame {
         list.remove(elementIndex);
     }
 
-    private boolean isAnElement(Groups group) {
+    static boolean isAnElement(Groups group) {
         return Elements.class.isAssignableFrom(group.getClass());
     }
 
