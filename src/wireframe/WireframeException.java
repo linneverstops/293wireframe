@@ -1,12 +1,31 @@
 package wireframe;
+
+/**
+ * Class WireframeException
+ *
+ * Represents an exception when there is an error in wireframe operations
+ * @author TungHo Lin
+ * @see java.lang.Exception
+ */
 public class WireframeException extends Exception {
 
+    /**
+     * The String error message
+     */
     private String message;
 
+    /**
+     * Constructor of Class WireframeException
+     * @param message The String error message
+     */
     WireframeException(String message) {
         this.message = message;
     }
 
+    /**
+     * Return the String of the WireframeException
+     * @return the String of the WireframeException
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
