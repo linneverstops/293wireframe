@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class ProgressBar extends Elements {
+public class ProgressBar extends Elements {
 
     /**
      * the timer that will start the ProgressBar
@@ -36,7 +36,7 @@ class ProgressBar extends Elements {
      * @param location_y The y-coordinate of the ProgressBar
      * @param orientation The orientation of the ProgressBar
      */
-    ProgressBar(int width, int length, int location_x, int location_y, int orientation) {
+    public ProgressBar(int width, int length, int location_x, int location_y, int orientation) {
         super(width, length, location_x, location_y, new JProgressBar(orientation, 0, 100));
         JProgressBar progressBar = ((JProgressBar)this.getComponent());
         progressBar.setValue(0);

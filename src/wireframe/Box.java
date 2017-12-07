@@ -10,7 +10,7 @@ import java.awt.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Box extends Elements {
+public class Box extends Elements {
 
     /**
      * Constructor of Class Box
@@ -19,7 +19,7 @@ class Box extends Elements {
      * @param location_x The x-coordinate of the Box
      * @param location_y The y-coordinate of the Box
      */
-    Box(int width, int length, int location_x, int location_y) {
+    public Box(int width, int length, int location_x, int location_y) {
         super(width, length, location_x, location_y, new JLabel());
         this.getComponent().setBorder(BorderFactory.createLineBorder(Color.RED));
     }

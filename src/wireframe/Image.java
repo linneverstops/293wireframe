@@ -9,7 +9,7 @@ import java.awt.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Image extends Elements {
+public class Image extends Elements {
 
     /**
      * Constructor of Class Image
@@ -19,7 +19,7 @@ class Image extends Elements {
      * @param location_y The y coordinate of the image
      * @param imagePath The String path of the image
      */
-    Image(int width, int length, int location_x, int location_y, String imagePath) {
+    public Image(int width, int length, int location_x, int location_y, String imagePath) {
         super(width, length, location_x, location_y, new JLabel(new ImageIcon(imagePath)));
         this.getComponent().setBorder(BorderFactory.createLineBorder(Color.black));
     }

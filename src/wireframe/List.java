@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class List extends Elements {
+public class List extends Elements {
 
     /**
      * Constructor of Class List
@@ -18,7 +18,7 @@ class List extends Elements {
      * @param location_y The y-coordinate of the List
      * @param listData The array of Strings that represent the elements in the List
      */
-    List(int width, int length, int location_x, int location_y, String[] listData) {
+    public List(int width, int length, int location_x, int location_y, String[] listData) {
         super(width, length, location_x, location_y, new JList<>(listData));
     }
 }

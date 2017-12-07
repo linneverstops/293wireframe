@@ -8,7 +8,7 @@ import java.awt.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Headline extends Text {
+public class Headline extends Text {
 
     /**
      * Constructor of Class Headline
@@ -18,7 +18,7 @@ class Headline extends Text {
      * @param location_y The y coordinate of the headline
      * @param headline The String headline
      */
-    Headline(int width, int length, int location_x, int location_y, String headline) {
+    public Headline(int width, int length, int location_x, int location_y, String headline) {
         super(width, length, location_x, location_y, headline);
         this.getComponent().setFont(new Font("Courier", Font.BOLD, 25));
     }

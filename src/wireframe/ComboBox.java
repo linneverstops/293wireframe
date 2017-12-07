@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class ComboBox extends Elements {
+public class ComboBox extends Elements {
 
     /**
      * Constructor of Class ComboBox
@@ -18,7 +18,7 @@ class ComboBox extends Elements {
      * @param location_y The y-coordinate of the ComboBox
      * @param combo The array of Strings that represent the options in the ComboBox
      */
-    ComboBox(int width, int length, int location_x, int location_y, String[] combo) {
+    public ComboBox(int width, int length, int location_x, int location_y, String[] combo) {
         super(width, length, location_x, location_y, new JComboBox<>(combo));
     }
 

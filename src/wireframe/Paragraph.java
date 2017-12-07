@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Paragraph extends Text {
+public class Paragraph extends Text {
 
     /**
      * Constructor of Class Paragraph
@@ -18,7 +18,7 @@ class Paragraph extends Text {
      * @param location_y The y coordinate of the Paragraph
      * @param paragraph The String paragraph
      */
-    Paragraph(int width, int length, int location_x, int location_y, String paragraph) {
+    public Paragraph(int width, int length, int location_x, int location_y, String paragraph) {
         super(width, length, location_x, location_y, paragraph);
         ((JLabel)this.getComponent()).setVerticalAlignment(SwingConstants.TOP);
     }

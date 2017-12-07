@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Slider extends Elements {
+public class Slider extends Elements {
 
     /**
      * Constructor of Class Slider
@@ -18,7 +18,7 @@ class Slider extends Elements {
      * @param location_y The y-coordinate of the Slider
      * @param orientation The orientation of the Slider
      */
-    Slider(int width, int length, int location_x, int location_y, int orientation) {
+    public Slider(int width, int length, int location_x, int location_y, int orientation) {
         super(width, length, location_x, location_y, new JSlider(orientation));
     }
 

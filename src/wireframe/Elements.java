@@ -140,8 +140,12 @@ abstract class Elements extends Groups {
      * @throws WireframeException if either of the input numbers are not positive integer
      */
     private void checkPositiveInput(int num1, int num2) throws WireframeException {
-        if(!(num1 >= 0 && num2 >= 0))
+        if(isNegative(num1) && isNegative(num2))
             throw new WireframeException("Input out of range");
+    }
+
+    private boolean isNegative(int num) {
+        return num < 0;
     }
 
     /**

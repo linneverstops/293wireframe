@@ -8,7 +8,7 @@ import javax.swing.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class ScrollBar extends Elements {
+public class ScrollBar extends Elements {
 
     /**
      * Constructor of Class ScrollBar
@@ -18,7 +18,7 @@ class ScrollBar extends Elements {
      * @param location_y The y-coordinate of the ScrollBar
      * @param orientation The orientation of the ScrollBar
      */
-    ScrollBar(int width, int length, int location_x, int location_y, int orientation) {
+    public ScrollBar(int width, int length, int location_x, int location_y, int orientation) {
         super(width, length, location_x, location_y, new JScrollBar(orientation));
     }
 

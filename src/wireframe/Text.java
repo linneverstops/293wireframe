@@ -10,7 +10,7 @@ import java.awt.*;
  * @author TungHo Lin
  * @see wireframe.Elements
  */
-class Text extends Elements {
+public class Text extends Elements {
 
     /**
      * The text that cannot be changed
@@ -25,7 +25,7 @@ class Text extends Elements {
      * @param location_y The y coordinate of the Text
      * @param text The String Text
      */
-    Text(int width, int length, int location_x, int location_y, String text) {
+    public Text(int width, int length, int location_x, int location_y, String text) {
         /* using html can allow multi-line read-only text in a JLabel */
         super(width, length, location_x, location_y, new JLabel("<html>" + text + "</html>"));
         this.getComponent().setBorder(BorderFactory.createLineBorder(Color.black));

@@ -9,7 +9,7 @@ import java.util.List;
  * @author TungHo Lin
  * @see wireframe.Groups
  */
-class Group extends Groups {
+public class Group extends Groups {
 
     /**
      * The List of elements and/or subgroups

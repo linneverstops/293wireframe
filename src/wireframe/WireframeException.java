@@ -7,7 +7,7 @@ package wireframe;
  * @author TungHo Lin
  * @see java.lang.Exception
  */
-public class WireframeException extends Exception {
+class WireframeException extends Exception {
 
     /**
      * The String error message

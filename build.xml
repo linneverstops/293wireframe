@@ -44,7 +44,7 @@ $ANT_HOME/lib must contain (see Ant-JUnit and JaCoCo installation guides):
   <property name="doc.dir" value="doc"/>
   
   <!--   Class containing the main method: define ONLY IF your project has a main -->
-  <property name="main-class" value="NumbersDriver"/>
+  <property name="main-class" value="Wireframe"/>
     
   <!--   Additional jar that may be needed for properly runnign junit -->
   <path id="hamcrest.classpath">
