@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Wireframe.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">wireframe</a> &gt; <a href="index.source.html" class="el_package">wireframe</a> &gt; <span class="el_source">Wireframe.java</span></div><h1>Wireframe.java</h1><pre class="source lang-java linenums">package wireframe;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Wireframe extends JLayeredPane implements ActionListener {
+
+<span class="pc" id="L11">    public enum Alignment {</span>
+<span class="fc" id="L12">        LEFT(&quot;&lt;body style='text-align: left'&gt;&quot;),</span>
+<span class="fc" id="L13">        RIGHT(&quot;&lt;body style='text-align: right'&gt;&quot;),</span>
+<span class="fc" id="L14">        CENTER(&quot;&lt;body style='text-align: center'&gt;&quot;),</span>
+<span class="fc" id="L15">        JUSTIFIED(&quot;&lt;body style='text-align: justify'&gt;&quot;);</span>
+
+        private String expression;
+
+<span class="fc" id="L19">        Alignment(String expression) {</span>
+<span class="fc" id="L20">            this.expression = expression;</span>
+<span class="fc" id="L21">        }</span>
+
+        String getExpression() {
+<span class="fc" id="L24">            return expression;</span>
+        }
+    }
+
+    private List&lt;Groups&gt; componentsList;
+
+<span class="fc" id="L30">    public Wireframe(int width, int length) {</span>
+<span class="fc" id="L31">        this.setSize(width, length);</span>
+<span class="fc" id="L32">        this.componentsList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L33">    }</span>
+
+    public static void main(String[] args) throws WireframeException {
+<span class="fc" id="L36">        Wireframe wireframe = new Wireframe(500, 600);</span>
+<span class="fc" id="L37">        wireframe.setLayout(null);</span>
+<span class="fc" id="L38">        JButton button = new JButton(&quot;Display All Annotations&quot;);</span>
+<span class="fc" id="L39">        button.addActionListener(wireframe);</span>
+<span class="fc" id="L40">        Box box = new Box(200, 100, 270, 420);</span>
+<span class="fc" id="L41">        box.annotate(&quot;Box and List&quot;);</span>
+<span class="fc" id="L42">        Image image = new Image(200, 200, 30, 30, &quot;cwru.png&quot;);</span>
+<span class="fc" id="L43">        image.annotate(&quot;Image&quot;);</span>
+<span class="fc" id="L44">        Paragraph paragraph = new Paragraph(200, 100, 30, 260, &quot;In U.S. News &amp; World Report's 2016 rankings, Case Western Reserve's undergraduate program ranked 37th among national universities.[7] In 2016, the inaugural edition of The Wall Street Journal/Times Higher Education (WSJ/THE) ranked Case Western Reserve as 32nd among all universities and 29th among private institutions.&quot;);</span>
+<span class="fc" id="L45">        paragraph.annotate(&quot;Paragraph&quot;);</span>
+<span class="fc" id="L46">        String[] combo = {&quot;Admissions&quot;, &quot;Athletics&quot;, &quot;Campus Life&quot;, &quot;Research&quot;};</span>
+<span class="fc" id="L47">        ComboBox comboBox = new ComboBox(200, 30, 30, 390, combo);</span>
+<span class="fc" id="L48">        comboBox.annotate(&quot;ComboBox&quot;);</span>
+<span class="fc" id="L49">        ProgressBar progressBar = new ProgressBar(200, 30, 30, 470, SwingConstants.HORIZONTAL);</span>
+<span class="fc" id="L50">        progressBar.annotate(&quot;ProgressBar&quot;);</span>
+<span class="fc" id="L51">        Headline headline = new Headline(200, 30, 270, 30, &quot;EECS293 PA12&quot;);</span>
+<span class="fc" id="L52">        headline.annotate(&quot;Headline&quot;);</span>
+<span class="fc" id="L53">        String words = &quot;Case Western Reserve University is a private doctorate-granting university in Cleveland, Ohio. The university was created in 1967 by the federation of Case Institute of Technology and Western Reserve University.&quot;;</span>
+<span class="fc" id="L54">        Text text = new Text(200, 220, 270, 90, words);</span>
+<span class="fc" id="L55">        text.annotate(&quot;CannedText&quot;);</span>
+<span class="fc" id="L56">        Slider slider = new Slider(200, 30, 270, 340, SwingConstants.HORIZONTAL);</span>
+<span class="fc" id="L57">        slider.annotate(&quot;Slider&quot;);</span>
+<span class="fc" id="L58">        String[] listData = {&quot;List1&quot;, &quot;List2&quot;, &quot;List3&quot;};</span>
+<span class="fc" id="L59">        wireframe.List list = new wireframe.List(150, 100, 270, 420, listData);</span>
+<span class="fc" id="L60">        ScrollBar scrollBar = new ScrollBar(40,100, 430, 420, SwingConstants.VERTICAL);</span>
+<span class="fc" id="L61">        scrollBar.annotate(&quot;ScrollBar&quot;);</span>
+<span class="fc" id="L62">        button.setSize(200, 15);</span>
+<span class="fc" id="L63">        button.setLocation(10, 10);</span>
+<span class="fc" id="L64">        wireframe.add(button);</span>
+<span class="fc" id="L65">        wireframe.addToWireframe(box);</span>
+<span class="fc" id="L66">        wireframe.addToWireframe(image);</span>
+<span class="fc" id="L67">        wireframe.addToWireframe(paragraph);</span>
+<span class="fc" id="L68">        wireframe.addToWireframe(comboBox);</span>
+<span class="fc" id="L69">        wireframe.addToWireframe(progressBar);</span>
+<span class="fc" id="L70">        wireframe.addToWireframe(headline);</span>
+<span class="fc" id="L71">        wireframe.addToWireframe(text);</span>
+<span class="fc" id="L72">        wireframe.addToWireframe(slider);</span>
+<span class="fc" id="L73">        wireframe.addToWireframe(list);</span>
+<span class="fc" id="L74">        wireframe.addToWireframe(scrollBar);</span>
+<span class="fc" id="L75">        paragraph.align(Alignment.JUSTIFIED);</span>
+<span class="fc" id="L76">        text.align(Alignment.CENTER);</span>
+<span class="nc" id="L77">        wireframe.displayGUI();</span>
+<span class="nc" id="L78">    }</span>
+
+    void displayGUI() {
+<span class="nc" id="L81">        JFrame jframe = new JFrame();</span>
+<span class="nc" id="L82">        this.addComponentsToGUI(this.componentsList);</span>
+<span class="nc" id="L83">        jframe.add(this);</span>
+<span class="nc" id="L84">        jframe.setSize(this.getSize());</span>
+<span class="nc" id="L85">        jframe.setVisible(true);;</span>
+<span class="nc" id="L86">    }</span>
+
+    void displayAnnotations() {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        for(Groups group : this.componentsList) {</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if(group.hasAnnotation()) {</span>
+<span class="nc" id="L91">                group.getAnnotation().setIsVisible(true);</span>
+<span class="nc" id="L92">                moveToFront(group.annotationComponent());</span>
+            }
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
+
+    public void addToWireframe(Groups group) throws WireframeException {
+<span class="fc" id="L98">        Wireframe.addGroupToListAtIndex(group, this.componentsList, 0);</span>
+<span class="fc" id="L99">    }</span>
+
+    public void removeFromWireframe(Groups group) throws WireframeException {
+<span class="fc" id="L102">        checkEmptyList();</span>
+<span class="fc" id="L103">        Wireframe.removeGroupFromList(group, this.componentsList);</span>
+<span class="fc" id="L104">    }</span>
+
+    public void moveGroupToIndex(Groups group, int index) throws WireframeException {
+<span class="fc" id="L107">        group.checkIsLocked();</span>
+<span class="fc" id="L108">        checkValidIndex(index);</span>
+<span class="fc" id="L109">        Wireframe.removeGroupFromList(group, this.componentsList);</span>
+<span class="fc" id="L110">        Wireframe.addGroupToListAtIndex(group, this.componentsList, index);</span>
+<span class="fc" id="L111">    }</span>
+
+    private void checkEmptyList() throws WireframeException {
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if(this.componentsList.size() == 0)</span>
+<span class="fc" id="L115">            throw new WireframeException(&quot;There is nothing to be removed&quot;);</span>
+<span class="fc" id="L116">    }</span>
+
+    private static void checkGroupExist(Groups group, List&lt;Groups&gt; components) throws WireframeException {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if(!components.contains(group))</span>
+<span class="fc" id="L120">            throw new WireframeException(&quot;No such group/element&quot;);</span>
+<span class="fc" id="L121">    }</span>
+
+    private void checkValidIndex(int index) throws WireframeException {
+<span class="fc bfc" id="L124" title="All 4 branches covered.">        if(index &gt;= componentsList.size() || index &lt; 0)</span>
+<span class="fc" id="L125">            throw new WireframeException(&quot;Index not in range&quot;);</span>
+<span class="fc" id="L126">    }</span>
+
+    List&lt;Groups&gt; getComponentsList() {
+<span class="fc" id="L129">        return this.componentsList;</span>
+    }
+
+    static void addGroupToListAtIndex(Groups group, List&lt;Groups&gt; list, int index) throws WireframeException {
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if(group.getAnnotation() != null)</span>
+<span class="fc" id="L134">            list.add(index, group.getAnnotation());</span>
+<span class="fc" id="L135">        list.add(index, group);</span>
+<span class="fc" id="L136">    }</span>
+
+    static void removeGroupFromList(Groups group, List&lt;Groups&gt; list) throws WireframeException {
+<span class="fc" id="L139">        group.checkIsLocked();</span>
+<span class="fc" id="L140">        Wireframe.checkGroupExist(group, list);</span>
+<span class="fc" id="L141">        int elementIndex = list.indexOf(group);</span>
+<span class="fc" id="L142">        list.remove(elementIndex);</span>
+<span class="fc" id="L143">    }</span>
+
+    static boolean isAnElement(Groups group) {
+<span class="fc" id="L146">        return Elements.class.isAssignableFrom(group.getClass());</span>
+    }
+
+    private void addComponentsToGUI(List&lt;Groups&gt; list) {
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        for(Groups component : list) {</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if(isAnElement(component)) {</span>
+<span class="nc" id="L152">                Elements element = (Elements)component;</span>
+<span class="nc" id="L153">                element.getComponent().setBounds(element.getLocation_x(), element.getLocation_y(), element.getWidth(), element.getLength());</span>
+<span class="nc" id="L154">                add(element.getComponent(), 0);</span>
+                //addAnnotationsToGUI(element);
+<span class="nc" id="L156">            }</span>
+            else {
+                //recursively retrieve all elements from the group
+<span class="nc" id="L159">                Group group = (Group)component;</span>
+<span class="nc" id="L160">                addComponentsToGUI(group.getElements());</span>
+            }
+<span class="nc" id="L162">        }</span>
+<span class="nc" id="L163">    }</span>
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L167">        displayAnnotations();</span>
+<span class="nc" id="L168">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
